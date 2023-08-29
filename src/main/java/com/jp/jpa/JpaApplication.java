@@ -26,6 +26,7 @@ public class JpaApplication {
 			studentRepository.findStudentByEmail("tania@jp.com").ifPresentOrElse(System.out::println,()-> System.out.println("student not found"));
 			studentRepository.whereFirstNameAndAgeEquals("Joy",77).forEach(System.out::println);
 			studentRepository.findStudentsByFirstNameEqualsAndAgeGreaterThanEqual("Joy", 10).forEach(System.out::println);
+			studentRepository.findStudentsByFirstNameEqualsAndAgeGreaterThanEqualNative("Joy",78).forEach(System.out::println);
 		};
 	}
 
