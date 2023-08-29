@@ -27,6 +27,8 @@ public class JpaApplication {
 			studentRepository.whereFirstNameAndAgeEquals("Joy",77).forEach(System.out::println);
 			studentRepository.findStudentsByFirstNameEqualsAndAgeGreaterThanEqual("Joy", 10).forEach(System.out::println);
 			studentRepository.findStudentsByFirstNameEqualsAndAgeGreaterThanEqualNative("Joy",78).forEach(System.out::println);
+			studentRepository.deleteStudentById(3L);
+			studentRepository.findAll().forEach(System.out::println);
 		};
 	}
 
