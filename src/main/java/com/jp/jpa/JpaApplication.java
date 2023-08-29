@@ -18,11 +18,14 @@ public class JpaApplication {
 	CommandLineRunner commandLineRunner(StudentRepository studentRepository){
 		return args -> {
 			Student joy = new Student("Joy", "Pedze", "joy@jp.com", 77);
+			Student joy1 = new Student("Joy", "Pedze", "joy1@jp.com", 78);
 			Student tania = new Student("Tania", "Pedze", "tania@jp.com", 21);
 
-			studentRepository.saveAll(List.of(joy,tania));
+			studentRepository.saveAll(List.of(joy,tania,joy1));
 
 			studentRepository.findStudentByEmail("tania@jp.com").ifPresentOrElse(System.out::println,()-> System.out.println("student not found"));
+			studentRepository.whereFirstNameAndAgeEquals("Joy",77).forEach(System.out::println);
+			studentRepository.findStudentsByFirstNameEqualsAndAgeGreaterThanEqual("Joy", 10).forEach(System.out::println);
 		};
 	}
 
