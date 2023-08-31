@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -29,16 +30,24 @@ public class JpaApplication {
 //			studentRepository.deleteStudentById(3L);
 //			studentRepository.findAll().forEach(System.out::println);
 
-			Faker faker = new Faker();
-			for (int i = 0; i <= 20; i++) {
-				String firstName = faker.name().firstName();
-				String lastName = faker.name().lastName();
-				String email = String.format("%s.%s@jp.com", firstName,lastName);
-				Integer age = faker.number().numberBetween(10,80);
-				Student student = new Student(firstName,lastName,email,age);
-				studentRepository.save(student);
-			}
+			generateStudents(studentRepository);
+
+			Sort sort = Sort.by(Sort.Direction.ASC, "firstName");
+			Sort sort1 = Sort.by("firstName").ascending().and(Sort.by("age").descending());
+			studentRepository.findAll(sort1)
+					.forEach(student -> System.out.println(student.getFirstName()+" "+student.getAge()));
 		};
 	}
 
+	private static void generateStudents(StudentRepository studentRepository) {
+		Faker faker = new Faker();
+		for (int i = 0; i <= 20; i++) {
+			String firstName = faker.name().firstName();
+			String lastName = faker.name().lastName();
+			String email = String.format("%s.%s@jp.com", firstName,lastName);
+			Integer age = faker.number().numberBetween(10,80);
+			Student student = new Student(firstName,lastName,email,age);
+			studentRepository.save(student);
+		}
+	}
 }
