@@ -5,6 +5,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
@@ -31,12 +33,19 @@ public class JpaApplication {
 //			studentRepository.findAll().forEach(System.out::println);
 
 			generateStudents(studentRepository);
+			//sorting(studentRepository);
+			PageRequest pageRequest = PageRequest.of(0,5,Sort.by("firstName").ascending());
+			Page<Student> page = studentRepository.findAll(pageRequest);
+			System.out.println(page);
 
-			Sort sort = Sort.by(Sort.Direction.ASC, "firstName");
-			Sort sort1 = Sort.by("firstName").ascending().and(Sort.by("age").descending());
-			studentRepository.findAll(sort1)
-					.forEach(student -> System.out.println(student.getFirstName()+" "+student.getAge()));
 		};
+	}
+
+	private static void sorting(StudentRepository studentRepository) {
+		Sort sort = Sort.by(Sort.Direction.ASC, "firstName");
+		Sort sort1 = Sort.by("firstName").ascending().and(Sort.by("age").descending());
+		studentRepository.findAll(sort1)
+				.forEach(student -> System.out.println(student.getFirstName()+" "+student.getAge()));
 	}
 
 	private static void generateStudents(StudentRepository studentRepository) {
