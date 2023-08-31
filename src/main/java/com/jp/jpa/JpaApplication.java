@@ -19,8 +19,16 @@ public class JpaApplication {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(StudentRepository studentRepository){
+	CommandLineRunner commandLineRunner(StudentRepository studentRepository,StudentIdCardRepository studentIdCardRepository){
 		return args -> {
+			Faker faker = new Faker();
+			String firstName = faker.name().firstName();
+			String lastName = faker.name().lastName();
+			String email = String.format("%s.%s@jp.com", firstName,lastName);
+			Integer age = faker.number().numberBetween(10,80);
+			Student student = new Student(firstName,lastName,email,age);
+			StudentIdCard studentIdCard = new StudentIdCard("123456", student);
+			studentIdCardRepository.save(studentIdCard);
 
 
 
