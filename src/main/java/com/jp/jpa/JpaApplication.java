@@ -21,6 +21,12 @@ public class JpaApplication {
 	@Bean
 	CommandLineRunner commandLineRunner(StudentRepository studentRepository){
 		return args -> {
+
+
+
+
+
+
 //			Student joy = new Student("Joy", "Pedze", "joy@jp.com", 77);
 //			Student joy1 = new Student("Joy", "Pedze", "joy1@jp.com", 78);
 //			Student tania = new Student("Tania", "Pedze", "tania@jp.com", 21);
@@ -32,21 +38,21 @@ public class JpaApplication {
 //			studentRepository.deleteStudentById(3L);
 //			studentRepository.findAll().forEach(System.out::println);
 
-			generateStudents(studentRepository);
-			//sorting(studentRepository);
-			PageRequest pageRequest = PageRequest.of(0,5,Sort.by("firstName").ascending());
-			Page<Student> page = studentRepository.findAll(pageRequest);
-			System.out.println(page);
+//			generateStudents(studentRepository);
+//			sorting(studentRepository);
+//			PageRequest pageRequest = PageRequest.of(0,5,Sort.by("firstName").ascending());
+//			Page<Student> page = studentRepository.findAll(pageRequest);
+//			System.out.println(page);
 
 		};
 	}
 
-	private static void sorting(StudentRepository studentRepository) {
-		Sort sort = Sort.by(Sort.Direction.ASC, "firstName");
-		Sort sort1 = Sort.by("firstName").ascending().and(Sort.by("age").descending());
-		studentRepository.findAll(sort1)
-				.forEach(student -> System.out.println(student.getFirstName()+" "+student.getAge()));
-	}
+//	private static void sorting(StudentRepository studentRepository) {
+//		Sort sort = Sort.by(Sort.Direction.ASC, "firstName");
+//		Sort sort1 = Sort.by("firstName").ascending().and(Sort.by("age").descending());
+//		studentRepository.findAll(sort1)
+//				.forEach(student -> System.out.println(student.getFirstName()+" "+student.getAge()));
+//	}
 
 	private static void generateStudents(StudentRepository studentRepository) {
 		Faker faker = new Faker();
