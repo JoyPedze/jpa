@@ -28,9 +28,9 @@ public class JpaApplication {
 			Integer age = faker.number().numberBetween(10,80);
 			Student student = new Student(firstName,lastName,email,age);
 			StudentIdCard studentIdCard = new StudentIdCard("123456", student);
-			StudentIdCard studentIdCard1 = new StudentIdCard("1234567");
-			studentIdCardRepository.saveAll(List.of(studentIdCard,studentIdCard1));
-			studentIdCardRepository.findById(2L).ifPresent(System.out::println);
+			studentIdCardRepository.save(studentIdCard);
+			studentIdCardRepository.findById(1L).ifPresent(System.out::println);
+			studentRepository.findById(1L).ifPresent(System.out::println);
 
 
 
