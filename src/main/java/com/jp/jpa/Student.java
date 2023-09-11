@@ -2,6 +2,9 @@ package com.jp.jpa;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity(name = "Student")
 @Table(name = "student")
 public class Student {
@@ -27,6 +30,9 @@ public class Student {
     private Integer age;
     @OneToOne(mappedBy = "student", orphanRemoval = true)
     private StudentIdCard studentIdCard;
+
+    @OneToMany(mappedBy = "student", orphanRemoval = true,cascade = CascadeType.ALL)
+    private List<Book> books = new ArrayList<>();
 
     public Student(String firstName, String lastName, String email, Integer age) {
         this.firstName = firstName;
@@ -77,6 +83,20 @@ public class Student {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public void addBook(Book book){
+        if(!this.books.contains(book)){
+            this.books.add(book);
+            book.setStudent(this);
+        }
+    }
+
+    public void removeBook(Book book){
+        if (this.books.contains(book)){
+            this.books.remove(book);
+            book.setStudent(null);
+        }
     }
 
     @Override

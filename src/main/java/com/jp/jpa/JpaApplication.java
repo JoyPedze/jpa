@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @SpringBootApplication
@@ -28,10 +29,16 @@ public class JpaApplication {
 			Integer age = faker.number().numberBetween(10,80);
 			Student student = new Student(firstName,lastName,email,age);
 			StudentIdCard studentIdCard = new StudentIdCard("123456", student);
+
+			student.addBook(new Book("Clean Code", LocalDateTime.now().minusDays(4)));
+			student.addBook(new Book("Spring Boot", LocalDateTime.now().minusDays(4)));
+			student.addBook(new Book("Spring Data JPA", LocalDateTime.now().minusDays(4)));
+
 			studentIdCardRepository.save(studentIdCard);
-			studentIdCardRepository.findById(1L).ifPresent(System.out::println);
-			studentRepository.findById(1L).ifPresent(System.out::println);
-			studentRepository.deleteById(1L);
+
+//			studentIdCardRepository.findById(1L).ifPresent(System.out::println);
+//			studentRepository.findById(1L).ifPresent(System.out::println);
+//			studentRepository.deleteById(1L);
 
 
 
