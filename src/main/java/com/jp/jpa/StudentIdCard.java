@@ -19,7 +19,7 @@ public class StudentIdCard {
     private Long id;
     @Column(name = "card_number", unique = true, nullable = false, length = 15)
     private String cardNumber;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER) // default
+    @OneToOne(cascade = CascadeType.ALL) // default
     @JoinColumn(name = "student_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "student_card_id_student_id_fk"))
     private Student student;
 

@@ -28,16 +28,25 @@ public class JpaApplication {
 			String email = String.format("%s.%s@jp.com", firstName,lastName);
 			Integer age = faker.number().numberBetween(10,80);
 			Student student = new Student(firstName,lastName,email,age);
-			StudentIdCard studentIdCard = new StudentIdCard("123456", student);
 
 			student.addBook(new Book("Clean Code", LocalDateTime.now().minusDays(4)));
 			student.addBook(new Book("Spring Boot", LocalDateTime.now().minusDays(4)));
 			student.addBook(new Book("Spring Data JPA", LocalDateTime.now().minusDays(4)));
 
+			StudentIdCard studentIdCard = new StudentIdCard("123456", student);
+
 			studentIdCardRepository.save(studentIdCard);
 
 //			studentIdCardRepository.findById(1L).ifPresent(System.out::println);
-//			studentRepository.findById(1L).ifPresent(System.out::println);
+			studentRepository.findById(1L).ifPresent(System.out::println);
+			studentRepository.findById(1L).ifPresent(s->{
+				System.out.println("fetch book lazy...");
+				List<Book> books = student.getBooks();
+				books.forEach(book -> {
+					System.out.println(s.getFirstName()+" borrowed "+book.getBookName());
+				});
+			});
+
 //			studentRepository.deleteById(1L);
 
 

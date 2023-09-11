@@ -65,6 +65,9 @@ public class Book {
         this.createdAt = createdAt;
     }
 
+    public Book() {
+    }
+
     @Override
     public String toString() {
         return "Book{" +
