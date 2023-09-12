@@ -35,7 +35,9 @@ public class JpaApplication {
 
 			StudentIdCard studentIdCard = new StudentIdCard("123456", student);
 
-			studentIdCardRepository.save(studentIdCard);
+			student.setStudentIdCard(studentIdCard);
+
+			studentRepository.save(student);
 
 //			studentIdCardRepository.findById(1L).ifPresent(System.out::println);
 			studentRepository.findById(1L).ifPresent(System.out::println);
@@ -81,15 +83,15 @@ public class JpaApplication {
 //				.forEach(student -> System.out.println(student.getFirstName()+" "+student.getAge()));
 //	}
 
-	private static void generateStudents(StudentRepository studentRepository) {
-		Faker faker = new Faker();
-		for (int i = 0; i <= 20; i++) {
-			String firstName = faker.name().firstName();
-			String lastName = faker.name().lastName();
-			String email = String.format("%s.%s@jp.com", firstName,lastName);
-			Integer age = faker.number().numberBetween(10,80);
-			Student student = new Student(firstName,lastName,email,age);
-			studentRepository.save(student);
-		}
-	}
+//	private static void generateStudents(StudentRepository studentRepository) {
+//		Faker faker = new Faker();
+//		for (int i = 0; i <= 20; i++) {
+//			String firstName = faker.name().firstName();
+//			String lastName = faker.name().lastName();
+//			String email = String.format("%s.%s@jp.com", firstName,lastName);
+//			Integer age = faker.number().numberBetween(10,80);
+//			Student student = new Student(firstName,lastName,email,age);
+//			studentRepository.save(student);
+//		}
+//	}
 }

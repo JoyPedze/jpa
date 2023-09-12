@@ -28,7 +28,7 @@ public class Student {
     private String email;
     @Column(name = "age", nullable = false)
     private Integer age;
-    @OneToOne(mappedBy = "student", orphanRemoval = true)
+    @OneToOne(mappedBy = "student", orphanRemoval = true, cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     private StudentIdCard studentIdCard;
 
     @OneToMany(mappedBy = "student", orphanRemoval = true,cascade = CascadeType.ALL)
@@ -101,6 +101,14 @@ public class Student {
             this.books.remove(book);
             book.setStudent(null);
         }
+    }
+
+    public StudentIdCard getStudentIdCard() {
+        return studentIdCard;
+    }
+
+    public void setStudentIdCard(StudentIdCard studentIdCard) {
+        this.studentIdCard = studentIdCard;
     }
 
     @Override
