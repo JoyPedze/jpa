@@ -37,6 +37,9 @@ public class JpaApplication {
 
 			student.setStudentIdCard(studentIdCard);
 
+			student.enrolToCourse(new Course("Computer Science","IT"));
+			student.enrolToCourse(new Course("Amigoscode Spring Data JPA","IT"));
+
 			studentRepository.save(student);
 
 //			studentIdCardRepository.findById(1L).ifPresent(System.out::println);

@@ -2,6 +2,9 @@ package com.jp.jpa;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author : Joy Pedze
  * @Email : joyp.pedze@gmail.com
@@ -21,6 +24,9 @@ public class Course {
     private String name;
     @Column(name = "department",nullable = false,columnDefinition = "TEXT")
     private String department;
+
+    @ManyToMany(mappedBy = "courses")
+    private List<Student> students = new ArrayList<>();
 
     public Course() {
     }
@@ -52,6 +58,10 @@ public class Course {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public List<Student> getStudents() {
+        return students;
     }
 
     @Override
