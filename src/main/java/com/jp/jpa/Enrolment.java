@@ -31,6 +31,12 @@ public class Enrolment {
         this.course = course;
     }
 
+    public Enrolment(EnrolmentId enrolmentId, Student student, Course course) {
+        this.enrolmentId = enrolmentId;
+        this.student = student;
+        this.course = course;
+    }
+
     public EnrolmentId getEnrolmentId() {
         return enrolmentId;
     }
