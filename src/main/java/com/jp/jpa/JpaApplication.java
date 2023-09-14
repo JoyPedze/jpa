@@ -37,8 +37,8 @@ public class JpaApplication {
 
 			student.setStudentIdCard(studentIdCard);
 
-			student.addEnrolment(new Enrolment(new EnrolmentId(1L,1L),student,new Course("Computer Science","IT")));
-			student.addEnrolment(new Enrolment(new EnrolmentId(1L,2L),student,new Course("Amigoscode Spring Data JPA","IT")));
+			student.addEnrolment(new Enrolment(new EnrolmentId(1L,1L),student,new Course("Computer Science","IT"),LocalDateTime.now()));
+			student.addEnrolment(new Enrolment(new EnrolmentId(1L,2L),student,new Course("Amigoscode Spring Data JPA","IT"),LocalDateTime.now()));
 
 //			student.enrolToCourse(new Course("Computer Science","IT"));
 //			student.enrolToCourse(new Course("Amigoscode Spring Data JPA","IT"));
